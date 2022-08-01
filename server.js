@@ -1,50 +1,28 @@
 
-var express=require('express');
-var app=express();
+var express = require('express');
+var app = express();
+var path=require("path");
+var fs=require("fs");
 
-app.get("/",(req, res)=>{
-    res.send(
-            "<h1>Vijay Sales </h1>"
-            +"<hr/>"
-            +"<h3>Smart Devices for sale</h3>"
-            + "<br/>"
-            + "<ol>"
-            +"<li>Laptops</li>"
-            +"<li>Mobile Phones</li>"
-            +"<li>Hololgraphic Devices</li>"
-            +"<li>Samrt Watches</li>"
-            +"<li>Gaming Consoles</li>"
-            + "</ol>"
-    );
+//server configuration
+app.use(express.static(path.join(__dirname,'public')));
+
+app.get('/', function (req, res) {
+   res.sendFile(path.join(___dirname + '/index.html'));
+});
+ 
+
+app.get('/hello', function (req, res) {
+  console.log("CAlling rest api");
+  var person={firstName:'Ravi',lastName:'Tambade',age:47};
+  res.send(person);
 });
 
-// app.get("/aboutus",(req, res)=>{
-//     res.send(
-//             "<h1>Vijay Sales </h1>"
-//             +"<hr/>"
-//             +"<h3>Doing ordinary things extraordinarily</h3>"
-//             + "<br/>"
-//             + "<ol>"
-//             +"<li>Chief Mentor: Ravi Tambade</li>"
-//             +"<li>Director: Shubhangi Tambade</li>"
-//             +"<li>Subject Matter Expert: Rohit Gore</li>"
-//             + "</ol>"
-//     );
-//});
+ 
+var server = app.listen(8081, function () {
 
-app.get("/login",(req, res)=>{
-    res.send(
-            "<h1>Vijay Sales </h1>"
-            + "<h3>Login</h3>"
-            +"<hr/>"
-            +"<form>"
-            + "<input/>"
-            + "<br/>"
-            +"<input/> "
-            +"<button>login</button>"
-            + "</form>"
-    );
-});
+  var host = server.address().address
+  var port = server.address().port
 
-var server=app.listen(8000);
-console.log("Vijay Sales Online shopping running on port 8000");
+  console.log("Example app listening at 8081");
+})
